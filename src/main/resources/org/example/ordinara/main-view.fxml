@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.ordinara.MainController"
+            styleClass="root-pane">
+
+    <!-- Header -->
+    <top>
+        <VBox styleClass="header" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="16" right="24" bottom="16" left="24"/>
+            </padding>
+            <Label text="Ordinara" styleClass="app-title"/>
+            <Label text="File Organizer" styleClass="app-subtitle"/>
+        </VBox>
+    </top>
+
+    <!-- Main content -->
+    <center>
+        <VBox spacing="0">
+
+            <!-- Folder selection bar -->
+            <HBox spacing="12" alignment="CENTER_LEFT" styleClass="folder-bar">
+                <padding>
+                    <Insets top="14" right="24" bottom="14" left="24"/>
+                </padding>
+                <TextField fx:id="folderPathField"
+                           promptText="Select a folder to organize..."
+                           editable="false"
+                           HBox.hgrow="ALWAYS"
+                           styleClass="folder-field"/>
+                <Button text="Browse" onAction="#onBrowse" styleClass="accent-btn"/>
+            </HBox>
+
+            <!-- File preview table -->
+            <TableView fx:id="fileTable" VBox.vgrow="ALWAYS" styleClass="file-table">
+                <placeholder>
+                    <Label text="Select a folder to scan files" styleClass="placeholder-text"/>
+                </placeholder>
+                <columns>
+                    <TableColumn fx:id="nameColumn" text="File Name" prefWidth="320"/>
+                    <TableColumn fx:id="extColumn" text="Type" prefWidth="80"/>
+                    <TableColumn fx:id="sizeColumn" text="Size" prefWidth="100"/>
+                    <TableColumn fx:id="categoryColumn" text="Category" prefWidth="140"/>
+                </columns>
+            </TableView>
+
+            <!-- Bottom status bar -->
+            <HBox spacing="12" alignment="CENTER_RIGHT" styleClass="bottom-bar">
+                <padding>
+                    <Insets top="12" right="24" bottom="12" left="24"/>
+                </padding>
+                <Label fx:id="statusLabel" text="No folder selected"
+                       styleClass="status-label" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <ProgressBar fx:id="progressBar" visible="false"
+                             prefWidth="160" prefHeight="18"/>
+                <Button fx:id="organizeBtn" text="Organize"
+                        onAction="#onOrganize" disable="true" styleClass="organize-btn"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
